@@ -10,28 +10,31 @@ public class guessServer {
     Lock lock = new ReentrantLock();
 
     public static void main(String[] Args) {
-        new manualBankServer();
+        new guessServer();
     }
 
 
 
 
-    public manualBankServer() {
+    public guessServer() {
         try {
             int clientAmount=1;
             ServerSocket server = new ServerSocket(8000);
             while (true) {
                 Socket socket = server.accept(); //Waits for connection from a cilent
                 System.out.println("Client "+clientAmount+" connected");
-                new Thread(new bankThread(socket)).start(); 
+                new Thread(new guessThread(socket)).start(); 
             }
         } catch (IOException ex) {
         }
     }
 
-    public class bankThread implements Runnable {
+    public class guessThread implements Runnable {
         private Socket threadSocket;
         private int winningNumber;
+        public guessThread(Socket s){
+            threadSocket=s;
+        }
 
         public void run() {
             try {
@@ -54,10 +57,11 @@ public class guessServer {
                     toClient.writeUTF(result); //sends back the result of high or low
                     toClient.flush(); //Cut connection
                 }
+                
             } catch (IOException e) {
             }
         }
     }
 
 
-}// BankServer
+}// guessServer
