@@ -26,20 +26,19 @@ public class manualGuessingGameShow {
                 System.out.print("Guess " + guessCount + ": ");
                 guessNum=console.nextInt();
             }
-            guessCount++;
+
             toServer.writeInt(guessNum);
             toServer.flush();
             String result=fromServer.readUTF();
             System.out.println(result+"\n");
-
             while(result.charAt(result.length()-2)!='!'){
                 if(result.charAt(result.length()-2)=='W')
                     low = guessNum;
                 else
                     high=guessNum;
+                guessCount++;
                 System.out.println("Guess a number from ("+low+"-"+high+")");
                 System.out.print("Guess " + guessCount + ": ");
-                guessCount++;
                 guessNum=console.nextInt();
                 while(guessNum<low||guessNum>high){
                     System.out.println("Outside of range! Try Again!");
