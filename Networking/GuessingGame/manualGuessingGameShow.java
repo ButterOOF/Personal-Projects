@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class manualGuessingGameShowFOURCLIENT {
+public class manualGuessingGameShow {
     public static void main(String[] Args) {
         try {
             int guessCount = 1, guessNum, low=0 , high;
